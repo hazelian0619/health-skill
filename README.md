@@ -19,6 +19,35 @@
 - 降级回退（API 异常仍可用）
 - 评测闭环（LLM judge + heuristic）
 
+## 运行要求
+- Python 3.11+
+- 有效 API Key（或降级为规则模式）
+
+## 快速安装
+```
+curl -sSL https://raw.githubusercontent.com/hazelian0619/health-skill/main/install.sh | bash
+```
+
+## 标准指令（5 个）
+- /health-init
+- /health-query
+- /health-stats
+- /health-benchmark
+- /health-add-rule
+
+## 示例输出
+```
+{"risk_level":"dangerous","need_hitl":true,"advice":"这是禁忌动作，建议停止并咨询医生。"}
+```
+
+## 架构
+见 docs/ARCHITECTURE.md
+
+## 开发
+```
+pytest -q
+```
+
 ## 目录结构
 ```
 health-agent-skill/
@@ -29,18 +58,6 @@ health-agent-skill/
   docs/
   evals/
   tests/
-```
-
-## 标准指令（5 个）
-- /health-init
-- /health-query
-- /health-stats
-- /health-benchmark
-- /health-add-rule
-
-## 安装
-```
-curl -sSL https://raw.githubusercontent.com/hazelian0619/health-skill/main/install.sh | bash
 ```
 
 ## 文档
