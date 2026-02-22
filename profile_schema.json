@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HealthAgentUserProfile",
+  "type": "object",
+  "required": ["static", "dynamic", "realtime"],
+  "properties": {
+    "static": {
+      "type": "object",
+      "required": ["age", "sex"],
+      "properties": {
+        "age": {"type": "integer", "minimum": 0, "maximum": 120},
+        "sex": {"type": "string", "enum": ["female", "male", "other", "unspecified"]},
+        "height_cm": {"type": "number", "minimum": 40, "maximum": 250},
+        "weight_kg": {"type": "number", "minimum": 2, "maximum": 300},
+        "surgeries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "date"],
+            "properties": {
+              "name": {"type": "string", "minLength": 1},
+              "date": {"type": "string", "format": "date"},
+              "notes": {"type": "string"}
+            },
+            "additionalProperties": false
+          }
+        },
+        "medical_history": {"type": "array", "items": {"type": "string"}},
+        "training_forbidden": {"type": "array", "items": {"type": "string"}},
+        "location": {"type": "string"},
+        "allergies": {"type": "array", "items": {"type": "string"}},
+        "chronic_conditions": {"type": "array", "items": {"type": "string"}},
+        "tcm_constitution": {
+          "type": "string",
+          "enum": ["balanced", "qi_deficiency", "yang_deficiency", "yin_deficiency", "phlegm_damp", "damp_heat", "blood_stasis", "qi_stagnation", "special"],
+          "default": "balanced"
+        }
+      },
+      "additionalProperties": false
+    },
+    "dynamic": {
+      "type": "object",
+      "properties": {
+        "goals": {"type": "array", "items": {"type": "string"}},
+        "activity_level": {"type": "string", "enum": ["sedentary", "light", "moderate", "high"]},
+        "sleep_hours": {"type": "number", "minimum": 0, "maximum": 24},
+        "diet_preferences": {"type": "array", "items": {"type": "string"}},
+        "medications": {"type": "array", "items": {"type": "string"}},
+        "stress_level": {"type": "integer", "minimum": 0, "maximum": 10}
+      },
+      "additionalProperties": false
+    },
+    "realtime": {
+      "type": "object",
+      "properties": {
+        "heart_rate_bpm": {"type": "integer", "minimum": 30, "maximum": 220},
+        "blood_pressure_sys": {"type": "integer", "minimum": 70, "maximum": 220},
+        "blood_pressure_dia": {"type": "integer", "minimum": 40, "maximum": 140},
+        "steps_today": {"type": "integer", "minimum": 0},
+        "pain_scale": {"type": "integer", "minimum": 0, "maximum": 10},
+        "reported_symptoms": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "static": {
+        "age": 24,
+        "sex": "female",
+        "height_cm": 162,
+        "weight_kg": 52,
+        "surgeries": [
+          {
+            "name": "Right hip surgery",
+            "date": "2024-08-12",
+            "notes": "post-op rehab ongoing"
+          }
+        ],
+        "allergies": ["penicillin"],
+        "chronic_conditions": []
+      },
+      "dynamic": {
+        "goals": ["mobility", "pain reduction"],
+        "activity_level": "light",
+        "sleep_hours": 7,
+        "diet_preferences": ["high protein"],
+        "medications": [],
+        "stress_level": 4
+      },
+      "realtime": {
+        "heart_rate_bpm": 76,
+        "blood_pressure_sys": 112,
+        "blood_pressure_dia": 72,
+        "steps_today": 5200,
+        "pain_scale": 3,
+        "reported_symptoms": ["occasional hip stiffness"]
+      }
+    }
+  ]
+}
