@@ -61,8 +61,6 @@ health-agent-skill/
 ```
 
 ## 文档
-- docs/COMMUNITY_GUIDE.md
-- docs/PROMPT_DESIGN.md
 - docs/EVAL_REPORT.md
 
 ## License
